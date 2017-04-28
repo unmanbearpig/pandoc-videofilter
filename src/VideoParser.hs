@@ -2,15 +2,10 @@
 
 module VideoParser where
 
+import Definitions
 import Text.Parsec
-
 import Text.Parsec
 import Data.Functor.Identity
-
-type Dimensions = (Int, Int)
-data VideoService = YouTube | Vimeo
-data VideoId = VideoId VideoService String
-data Video = Video VideoId (Maybe Dimensions)
 
 parse' :: Stream s Identity t => Parsec s () a -> s -> Maybe a
 parse' p = either (const Nothing) Just . parse p ""

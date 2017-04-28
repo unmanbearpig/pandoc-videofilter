@@ -17,7 +17,7 @@ dimensionsParser = do
   h <- many1 digit
   char 'x'
   w <- many1 digit
-  return $ (read h, read w)
+  return (read h, read w)
 
 parseVideo :: String -> String -> Maybe Video
 parseVideo url title = do

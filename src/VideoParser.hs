@@ -4,7 +4,6 @@ module VideoParser where
 
 import Definitions
 import Text.Parsec
-import Text.Parsec
 import Data.Functor.Identity
 
 parse' :: Stream s Identity t => Parsec s () a -> s -> Maybe a

@@ -19,9 +19,7 @@ library
                      , VideoParser
                      , Definitions
                      , VideoRenderer
-  build-depends:       aeson >= 1.0.2.1
-                     , base >= 4.7 && < 5
-                     , bytestring >= 0.10.8.1
+  build-depends:       base >= 4.7 && < 5
                      , lucid
                      , pandoc
                      , pandoc-types
@@ -33,11 +31,7 @@ executable videofilter-exe
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       aeson >= 1.0.2.1
-                     , base
-                     , bytestring >= 0.10.8.1
-                     , parsec >= 3.1.11
-                     , text >= 1.2.2.1
+  build-depends:       base
                      , videofilter
   default-language:    Haskell2010
 
@@ -45,11 +39,7 @@ test-suite videofilter-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
-  build-depends:       aeson >= 1.0.2.1
-                     , base
-                     , bytestring >= 0.10.8.1
-                     , parsec >= 3.1.11
-                     , text >= 1.2.2.1
+  build-depends:       base
                      , videofilter
 
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N

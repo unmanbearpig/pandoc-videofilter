@@ -16,6 +16,12 @@ The number is the Vimeo's video id that you can find in the URL https://vimeo.co
 ![](vimeo:95369722)
 ```
 
+Output:
+
+```html
+<p><iframe allowfullscreen mozallowfullscreen frameborder="0" src="https://player.vimeo.com/video/95369722?title=0&amp;amp;portrait=0&amp;amp;badge=0" webkitallowfullscreen></iframe></p>
+```
+
 ### Embed YouTube video
 
 "FEFETKhhq8w" is the YouTube video id in the URL https://www.youtube.com/watch?v=FEFETKhhq8w
@@ -24,10 +30,22 @@ The number is the Vimeo's video id that you can find in the URL https://vimeo.co
 ![](youtube:FEFETKhhq8w)
 ```
 
+Output:
+
+```html
+<p><iframe allowfullscreen mozallowfullscreen frameborder="0" src="//www.youtube.com/embed/FEFETKhhq8w" webkitallowfullscreen></iframe></p>
+```
+
 ### Specify the video size
 
 ```
 ![400x300](youtube:FEFETKhhq8w)
+```
+
+Output:
+
+```html
+<p><iframe height="300" width="400" allowfullscreen mozallowfullscreen frameborder="0" src="//www.youtube.com/embed/FEFETKhhq8w" webkitallowfullscreen></iframe></p>
 ```
 
 ### Set video size with an environment variable

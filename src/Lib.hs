@@ -5,12 +5,13 @@ module Lib
     ( process
     ) where
 
-import Definitions
-import VideoParser
-import VideoRenderer
+import Definitions (Dimensions, Video(..))
+import VideoParser (parseVideoId, parseDimensions)
+import VideoRenderer (renderVideoEmbed)
 import qualified Data.Text.Lazy as LT
 import Data.List (uncons)
-import Text.Pandoc.JSON
+import Text.Pandoc.Definition (Inline(..), Format(..))
+import Text.Pandoc.JSON (toJSONFilter)
 import Text.Pandoc.Walk (query)
 import Data.Maybe (fromMaybe, mapMaybe)
 import System.Environment (lookupEnv)

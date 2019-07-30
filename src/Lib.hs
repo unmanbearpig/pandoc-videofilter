@@ -17,16 +17,17 @@ import Text.Pandoc.Walk (query)
 import Data.Maybe (fromMaybe, mapMaybe)
 import System.Environment (lookupEnv)
 import Control.Applicative ((<|>))
+import WrapperElement (WrapperElement(..), wrapWithElement, wrapperElementFromMaybeString)
 
 extractDimensions :: [Inline] -> Maybe Dimensions
 extractDimensions = fmap fst <$> uncons . mapMaybe (parseDimensions . query (\(Str s) -> s))
 
-inlineHtmlVideo :: Maybe Dimensions -> Inline -> Maybe Inline
-inlineHtmlVideo defaultDimensions (Image _ inlines (url, _)) =
-  rawHtml . renderVideoEmbed . (`Video` dimensions) <$> parseVideoId url
+inlineHtmlVideo :: Maybe Dimensions -> WrapperElement -> Inline -> Maybe Inline
+inlineHtmlVideo defaultDimensions wrapperEl (Image _ inlines (url, _)) =
+  rawHtml . wrapWithElement wrapperEl . renderVideoEmbed . (`Video` dimensions) <$> parseVideoId url
   where rawHtml = RawInline (Format "html") . LT.unpack
         dimensions = extractDimensions inlines <|> defaultDimensions
-inlineHtmlVideo _ _ = Nothing
+inlineHtmlVideo _ _ _ = Nothing
 
 onFormat :: Format -> (a -> Maybe a) -> Maybe Format -> a -> a
 onFormat format f maybeFormat x
@@ -36,4 +37,5 @@ onFormat format f maybeFormat x
 process :: IO ()
 process = do
   defaultDimensions <- lookupEnv "VIDEO_DIMENSIONS"
-  toJSONFilter $ onFormat (Format "html") (inlineHtmlVideo (defaultDimensions >>= parseDimensions))
+  wrapperElementStr <- lookupEnv "VIDEO_WRAPPER_CSS_CLASS"
+  toJSONFilter $ onFormat (Format "html") (inlineHtmlVideo (defaultDimensions >>= parseDimensions) (wrapperElementFromMaybeString wrapperElementStr))

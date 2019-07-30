@@ -19,6 +19,7 @@ library
                      , VideoParser
                      , Definitions
                      , VideoRenderer
+                     , WrapperElement
   build-depends:       base >= 4.7 && < 5
                      , lucid
                      , pandoc

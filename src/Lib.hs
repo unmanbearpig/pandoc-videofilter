@@ -3,6 +3,7 @@
 
 module Lib
     ( process
+    , inlineHtmlVideo
     ) where
 
 import Definitions (Dimensions, Video(..))

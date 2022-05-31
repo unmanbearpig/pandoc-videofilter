@@ -5,15 +5,29 @@
 
 packages:
 - completed:
+    hackage: hspec-2.10.0@sha256:2d1dc53e361998f002497b7222fdb700cc540b2aaf880e2619a0b5d54abb74e5,1712
     pantry-tree:
-      sha256: 75d147956a84025f73234eaa43b6b6f7a4099923c761505ace7a7938204012cc
-      size: 532
-    hackage: hspec-2.6.1@sha256:2abaa8bed30616e123c36745059b6f7bf3de3d52f7220b38939d04c0a805b7e9,1769
+      size: 583
+      sha256: 5d8a184b89267523718e22cc4ded4c980d08af7aa4b53ec027822d0cf5065756
   original:
-    hackage: hspec-2.6.1
+    hackage: hspec-2.10.0
+- completed:
+    hackage: hspec-core-2.10.0@sha256:a5d7d3e7bbcf42e8def370d86ab08252821be6fb9d00dddb3c484973d7a6e801,6617
+    pantry-tree:
+      size: 5819
+      sha256: 72f031ce92daeeb12c36566389cef84fd2a61866a067fe1147d8b537868220aa
+  original:
+    hackage: hspec-core-2.10.0
+- completed:
+    hackage: hspec-discover-2.10.0@sha256:517d0892217539969c199f9cc30065db7bcd68ff5512095e4f94ff8ef35d1313,2166
+    pantry-tree:
+      size: 828
+      sha256: 5e31c43b5c1477987d7321456b3dc69ce0b8f35312c5ea516702f91be42b20ca
+  original:
+    hackage: hspec-discover-2.10.0
 snapshots:
 - completed:
-    sha256: f1c4aca9b9b81afbb9db55571acb0690cdc01ac97a178234de281f9dc075e95e
     size: 618506
     url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/8.yaml
+    sha256: f1c4aca9b9b81afbb9db55571acb0690cdc01ac97a178234de281f9dc075e95e
   original: lts-19.8

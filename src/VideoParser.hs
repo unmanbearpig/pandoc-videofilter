@@ -5,11 +5,12 @@ module VideoParser where
 import Definitions
 import Text.Parsec
 import Data.Functor.Identity
+import Data.Text
 
 parse' :: Stream s Identity t => Parsec s () a -> s -> Maybe a
 parse' p = either (const Nothing) Just . parse p ""
 
-parseDimensions :: String -> Maybe Dimensions
+parseDimensions :: Text -> Maybe Dimensions
 parseDimensions = either (const Nothing) Just . parse dimensionsParser ""
 
 dimensionsParser :: Stream s m Char => ParsecT s u m (Int, Int)
@@ -19,12 +20,12 @@ dimensionsParser = do
   w <- many1 digit
   return (read h, read w)
 
-parseVideo :: String -> String -> Maybe Video
+parseVideo :: Text -> Text -> Maybe Video
 parseVideo url title = do
   vId <- parseVideoId url
   return $ Video vId $ parseDimensions title
 
-parseVideoId :: String -> Maybe VideoId
+parseVideoId :: Text -> Maybe VideoId
 parseVideoId = parse' videoParser
 
 videoParser :: Stream s m Char => ParsecT s u m VideoId

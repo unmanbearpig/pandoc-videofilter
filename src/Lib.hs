@@ -10,6 +10,7 @@ import Definitions (Dimensions, Video(..))
 import VideoParser (parseVideoId, parseDimensions)
 import VideoRenderer (renderVideoEmbed)
 import qualified Data.Text.Lazy as LT
+import qualified Data.Text as Text
 import Data.List (uncons)
 import Text.Pandoc.Definition (Inline(..), Format(..))
 import Text.Pandoc.JSON (toJSONFilter)
@@ -25,7 +26,7 @@ extractDimensions = fmap fst <$> uncons . mapMaybe (parseDimensions . query (\(S
 inlineHtmlVideo :: Maybe Dimensions -> WrapperElement -> Inline -> Maybe Inline
 inlineHtmlVideo defaultDimensions wrapperEl (Image _ inlines (url, _)) =
   rawHtml . wrapWithElement wrapperEl . renderVideoEmbed . (`Video` dimensions) <$> parseVideoId url
-  where rawHtml = RawInline (Format "html") . LT.unpack
+  where rawHtml = RawInline (Format "html") . LT.toStrict
         dimensions = extractDimensions inlines <|> defaultDimensions
 inlineHtmlVideo _ _ _ = Nothing
 
@@ -36,6 +37,6 @@ onFormat format f maybeFormat x
 
 process :: IO ()
 process = do
-  defaultDimensions <- lookupEnv "VIDEO_DIMENSIONS"
+  defaultDimensions <- (lookupEnv "VIDEO_DIMENSIONS")
   wrapperElementStr <- lookupEnv "VIDEO_WRAPPER_CSS_CLASS"
-  toJSONFilter $ onFormat (Format "html") (inlineHtmlVideo (defaultDimensions >>= parseDimensions) (wrapperElementFromMaybeString wrapperElementStr))
+  toJSONFilter $ onFormat (Format "html") (inlineHtmlVideo (defaultDimensions >>= (parseDimensions . Text.pack)) (wrapperElementFromMaybeString wrapperElementStr))
